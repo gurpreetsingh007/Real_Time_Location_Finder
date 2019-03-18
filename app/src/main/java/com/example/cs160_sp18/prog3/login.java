@@ -24,7 +24,7 @@ public class login extends AppCompatActivity {
 
         username = text.getText().toString(); // string username
 
-        Log.d("Username", "Value: checking--->nnn" + (nn));
+//        Log.d("Username", "Value: checking--->nnn" + (nn));
 
         startbutton = findViewById(R.id.button2); // starting button
         startbutton.setOnClickListener(new View.OnClickListener() {
@@ -32,7 +32,7 @@ public class login extends AppCompatActivity {
             public void onClick(View view) {
                 EditText ee = findViewById(R.id.username);
                 String mm = ee.getText().toString();
-                Log.d("Username", "mm---->>" + (mm));
+//                Log.d("Username", "mm---->>" + (mm));
 
                 Intent intent = new Intent(login.this,Berkeley_Bears.class);
                 intent.putExtra("pass",mm);
@@ -40,19 +40,5 @@ public class login extends AppCompatActivity {
             }
         });
 
-    }
-
-
-    private void setOnClickForStartButton() {
-        startbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myintent = new Intent(login.this,Berkeley_Bears.class);
-                myintent.putExtra("pass",username);
-                startActivity(myintent);
-
-
-            }
-        });
     }
 }

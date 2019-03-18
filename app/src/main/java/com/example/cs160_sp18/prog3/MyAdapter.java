@@ -52,25 +52,27 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ImageViewHolder>  {
         holder.album.setImageResource(image_id); //pass the image id
         holder.album_Title.setText(titles[position]); // pass the titles
 
-        double distance = getDistancBetweenTwoPoints(current_latitiude,album_latitude[position]
-                ,current_longitude,album_longitude[position]);
+        double distance = getDistancBetweenTwoPoints(current_latitiude,current_longitude
+                ,album_latitude[position],album_longitude[position]);
         Log.d("Location distance", "Value: " + distance);
         holder.album_range.setText((distance)+" meters away");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (distance < 100000000){
-//                    Toast.makeText(view.getContext(),
-//                            "You must be within 10 meters of a landmark to access it's feed",
-//                            Toast.LENGTH_SHORT).show();
-//                }
-//                else{
+                if (distance > 10){
+                    Toast.makeText(view.getContext(),
+                            "You must be within 10 meters of a landmark to access it's feed",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else{
                     Intent intent = new Intent(view.getContext(),CommentFeedActivity.class);
                     intent.putExtra("passing_username",username);
                     intent.putExtra("landmark", titles[position]);
                     view.getContext().startActivity(intent);
-//                }
+//                    Log.d("Location distance", "Value: " + distance);
+
+                }
             }
         });
     }
@@ -84,14 +86,12 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ImageViewHolder>  {
         ImageView album;
         TextView album_Title;
         TextView album_range;
-//        Context context;
 
         public ImageViewHolder(View itemView) {
             super(itemView);
             album = itemView.findViewById(R.id.album);
             album_Title = itemView.findViewById(R.id.album_title);
             album_range = itemView.findViewById(R.id.album_range);
-//            context = itemView.getContext();
         }
     }
 
@@ -103,31 +103,7 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ImageViewHolder>  {
         current.setLongitude(lon1);
         other.setLatitude(lat2);
         other.setLongitude(lon2);
-        return Math.round(current.distanceTo(other));
-
-//        float[] distance = new float[2];
-//
-//        Location.distanceBetween( lat1, lon1,
-//                lat2, lon2, distance);
-//
-//        return distance[0];
-
-
-//        double earthRadius = 3958.75; // in miles, change to 6371 for kilometer output
-//
-//        double dLat = Math.toRadians(lat2-lat1);
-//        double dLng = Math.toRadians(lon2-lon1);
-//
-//        double sindLat = Math.sin(dLat / 2);
-//        double sindLng = Math.sin(dLng / 2);
-//
-//        double a = Math.pow(sindLat, 2) + Math.pow(sindLng, 2)
-//                * Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2));
-//
-//        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-//
-//        double dist = earthRadius * c;
-//
-//        return dist/1609.34;
+        int dd = (int) current.distanceTo(other);
+        return dd;
     }
 }

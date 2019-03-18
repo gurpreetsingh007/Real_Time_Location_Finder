@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!-- layout for comment feed -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/comment_layout"
     android:layout_width="match_parent"
@@ -35,7 +36,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:transcriptMode="alwaysScroll"
-        app:stackFromEnd="true" />
+        app:stackFromEnd="true"
+
+        />
 
     <RelativeLayout
         android:id="@+id/llSend"
