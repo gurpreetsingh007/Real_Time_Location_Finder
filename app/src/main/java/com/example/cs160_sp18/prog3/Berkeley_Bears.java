@@ -117,12 +117,12 @@ public class Berkeley_Bears extends AppCompatActivity implements GoogleApiClient
             @Override
             public void onClick(View view) {
                 getlocation();
-                Log.d("ADebugTag", "Value: " + Double.toString(currentlatitude));
-                Log.d("Location", "Value: " + (album_latitudes[0]));
-                Log.d("Username", "Value: " + (username));
+//                Log.d("ADebugTag", "Value: " + Double.toString(currentlatitude));
+//                Log.d("Location", "Value: " + (album_latitudes[0]));
+//                Log.d("Username", "Value: " + (username));
 
 
-                Toast.makeText(getApplicationContext(), String.valueOf(currentlongitude), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), String.valueOf(currentlongitude), Toast.LENGTH_SHORT).show();
                 adapter = new MyAdapter(images, titles,currentlatitude,currentlongitude,album_latitudes
                         ,album_longitudes,album_Location,username);
                 recyclerView.setAdapter(adapter);

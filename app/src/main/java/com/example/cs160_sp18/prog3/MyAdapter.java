@@ -1,6 +1,7 @@
 package com.example.cs160_sp18.prog3;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Location;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -55,24 +56,27 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ImageViewHolder>  {
         double distance = getDistancBetweenTwoPoints(current_latitiude,current_longitude
                 ,album_latitude[position],album_longitude[position]);
         Log.d("Location distance", "Value: " + distance);
-        holder.album_range.setText((distance)+" meters away");
+        if (distance < 10){
+            holder.album_range.setTextColor(Color.GREEN);
+            holder.album_range.setText("Less than 10 meters away");
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (distance > 10){
-                    Toast.makeText(view.getContext(),
-                            "You must be within 10 meters of a landmark to access it's feed",
-                            Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Intent intent = new Intent(view.getContext(),CommentFeedActivity.class);
-                    intent.putExtra("passing_username",username);
-                    intent.putExtra("landmark", titles[position]);
-                    view.getContext().startActivity(intent);
+        }else{
+            holder.album_range.setText((distance)+" meters away");
+
+        }
+        holder.itemView.setOnClickListener(view -> {
+            if (distance > 10){
+                Toast.makeText(view.getContext(),
+                        "You must be within 10 meters of a landmark to access it's feed",
+                        Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Intent intent = new Intent(view.getContext(),CommentFeedActivity.class);
+                intent.putExtra("passing_username",username);
+                intent.putExtra("landmark", titles[position]);
+                view.getContext().startActivity(intent);
 //                    Log.d("Location distance", "Value: " + distance);
 
-                }
             }
         });
     }
