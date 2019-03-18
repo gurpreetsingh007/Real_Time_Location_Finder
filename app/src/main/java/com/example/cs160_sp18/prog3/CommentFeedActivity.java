@@ -1,32 +1,39 @@
 package com.example.cs160_sp18.prog3;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Dictionary;
+import java.util.HashMap;
 
 // Displays a list of comments for a particular landmark.
 public class CommentFeedActivity extends AppCompatActivity {
 
     private static final String TAG = CommentFeedActivity.class.getSimpleName();
-
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private ArrayList<Comment> mComments = new ArrayList<Comment>();
+    ArrayList<HashMap> landmarks = new ArrayList<>();
+    HashMap hm = new HashMap();
 
     // UI elements
     EditText commentInputBox;
     RelativeLayout layout;
     Button sendButton;
     Toolbar mToolbar;
+    String username;
 
     /* TODO: right now mRecyclerView is using hard coded comments.
      * You'll need to add functionality for pulling and posting comments from Firebase
@@ -35,10 +42,19 @@ public class CommentFeedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        addLandmarks();
         setContentView(R.layout.activity_comment_feed);
 
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra("passing_username");
+        Log.d("User", "commentfeed: " + username);
+
+
         // TODO: replace this with the name of the landmark the user chose
-        String landmarkName = "test landmark";
+        String landmarkName = intent.getStringExtra("landmark");
+
+        Log.d("Landmark", "landmark: " + landmarkName);
 
         // sets the app bar's title
         setTitle(landmarkName + ": Posts");
@@ -50,6 +66,15 @@ public class CommentFeedActivity extends AppCompatActivity {
 
         mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mToolbar);
+
+
+
+        mToolbar.setTitle(landmarkName + ": Posts");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set the back arrow button
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
+
 
         mRecyclerView = (RecyclerView) findViewById(R.id.comment_recycler);
         mRecyclerView.setHasFixedSize(true);
@@ -106,8 +131,8 @@ public class CommentFeedActivity extends AppCompatActivity {
     }
 
     private void postNewComment(String commentText) {
-        Comment newComment = new Comment(commentText, "one-sixty student", new Date());
-        mComments.add(newComment);
+        Comment newComment = new Comment(commentText, username, new Date()); // username
+        mComments.add(newComment); // save the message in Array list mComments
         setAdapterAndUpdateData();
     }
 
@@ -115,5 +140,42 @@ public class CommentFeedActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         finish();
         return true;
+    }
+
+    public void addLandmarks(){
+        hm.put("landmark_name1", new String("Class of 1927 Bear"));
+        hm.put("coordinates1", new String("37.869288,-122.260125"));
+        hm.put("filename1", new String("mlk_bear"));
+
+        hm.put("landmark_name2", new String("Stadium Entrance Bear"));
+        hm.put("coordinates2", new String("37.871305,-122.252516"));
+        hm.put("filename2", new String("outside_stadium"));
+
+        hm.put("landmark_name3", new String("Macchi Bears"));
+        hm.put("coordinates3", new String("37.874118,-122.258778"));
+        hm.put("filename3", new String("macchi_bears"));
+
+        hm.put("landmark_name4", new String("Les Bears"));
+        hm.put("coordinates4", new String("37.871707,-122.253602"));
+        hm.put("filename4", new String("les_bears"));
+
+        hm.put("landmark_name5", new String("Strawberry Creek Topiary Bear"));
+        hm.put("coordinates5", new String("37.869861,-122.261148"));
+        hm.put("filename5", new String("strawberry_creek"));
+
+        hm.put("landmark_name6", new String("South Hall Little Bear"));
+        hm.put("coordinates6", new String("37.871382,-122.258355"));
+        hm.put("filename6", new String("south_hall"));
+
+        hm.put("landmark_name7", new String("Great Bear Bell Bears"));
+        hm.put("coordinates7", new String("37.872061599999995,-122.2578123"));
+        hm.put("filename7", new String("bell_bears"));
+
+        hm.put("landmark_name8", new String("Campanile Esplanade Bears"));
+        hm.put("coordinates8", new String("37.87233810000001,-122.25792999999999"));
+        hm.put("filename8", new String("bench_bears"));
+
+        landmarks.add(hm);
+
     }
 }

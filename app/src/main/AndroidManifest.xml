@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cs160_sp18.prog3">
 
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,17 +14,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".CommentFeedActivity"
-            android:label="@string/title_activity_comment_feed"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".Berkeley_Bears"></activity>
+        <activity android:name=".login"
+                  android:label="login Feed"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
-            <!-- makes this the first activity presented on app launch. -->
-            <!-- you will want to move this intent filter to a different activity later -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".CommentFeedActivity"
+            android:label="@string/title_activity_comment_feed"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:parentActivityName=".Berkeley_Bears">
+
+            <!-- makes this the first activity presented on app launch. -->
+            <!-- you will want to move this intent filter to a different activity later -->
+             <!--<intent-filter>-->
+             <!--<action android:name="android.intent.action.MAIN" />-->
+             <!--<category android:name="android.intent.category.LAUNCHER" />-->
+             <!--</intent-filter>-->
+        </activity>
     </application>
+
 </manifest>

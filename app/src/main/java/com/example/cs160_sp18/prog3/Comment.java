@@ -3,6 +3,8 @@ package com.example.cs160_sp18.prog3;
 import java.util.Date;
 
 // custom class made for storing a message. you can update this class
+
+// this class is to know how long ago the message was posted
 public class Comment {
 
     public String text;
