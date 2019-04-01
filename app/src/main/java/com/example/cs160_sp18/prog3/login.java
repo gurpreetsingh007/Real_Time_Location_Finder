@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class login extends AppCompatActivity {
 
@@ -31,12 +32,16 @@ public class login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 EditText ee = findViewById(R.id.username);
-                String mm = ee.getText().toString();
+                String name = ee.getText().toString();
 //                Log.d("Username", "mm---->>" + (mm));
-
-                Intent intent = new Intent(login.this,Berkeley_Bears.class);
-                intent.putExtra("pass",mm);
-                startActivity(intent);
+                if(name.length()>0){
+                    Intent intent = new Intent(login.this,Berkeley_Bears.class);
+                    intent.putExtra("pass",name);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"Enter a valid username",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
