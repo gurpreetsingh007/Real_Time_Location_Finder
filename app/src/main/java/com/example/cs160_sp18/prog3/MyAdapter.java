@@ -75,8 +75,6 @@ class MyAdapter extends RecyclerView.Adapter<MyAdapter.ImageViewHolder>  {
                 intent.putExtra("passing_username",username);
                 intent.putExtra("landmark", titles[position]);
                 view.getContext().startActivity(intent);
-//                    Log.d("Location distance", "Value: " + distance);
-
             }
         });
     }
